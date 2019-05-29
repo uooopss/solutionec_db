@@ -4,6 +4,13 @@ import './index.css';
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
 
+import "uikit/dist/css/uikit.min.css";
+import * as UIkit from "uikit";
+import UIIcons from "uikit/dist/js/uikit-icons.min.js";
+
+// loads the Icon plugin
+UIkit.use(UIIcons);
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

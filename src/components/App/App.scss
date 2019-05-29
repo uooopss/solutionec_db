@@ -1,0 +1,18 @@
+.json_editor {
+  .uk-navbar-container {
+    .uk-navbar-nav {
+      .uk-navbar-dropdown-nav > li {
+        color: #999;
+        cursor: pointer;
+      }
+
+      .uk-navbar-dropdown-nav > li:focus,
+      .uk-navbar-dropdown-nav > li:hover {
+        color: #666;
+      }
+    }
+  }
+
+  .main-content {
+  }
+}
