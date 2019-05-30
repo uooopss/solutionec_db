@@ -1,6 +1,7 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as UIkit from "uikit";
+import "whatwg-fetch";
 
 import "./ModalUrl.scss";
 import "jsoneditor/dist/jsoneditor.css";
@@ -77,16 +78,30 @@ class ModalUrl extends React.Component {
   };
 
   getFileByUrl = async url => {
-    const response = await fetch(`http://localhost:3000/${url}`, { headers: { "Content-Type": "application/json" } })
-      .then(response => {
-      console.log("response", response);
-      return response.json();
-    })
-      // .then(res => res.text())  
-      // .then(text => console.log("TEXT",text)) 
+   const response = await fetch(`${url}`)
+      //   .then(response => {
+      //   console.log("response", response);
+      //   return response.json();
+      // })
+      // .then(function(response) {
+      //   console.log("response", response);
+      //   console.log(response.headers.get("Content-Type"));
+      //   console.log(response.status);
+      //   return await response.json();
+      // })
+      // .then(function(json) {
+      //   console.log("parsed json", json);
+      // })
+      // .catch(function(ex) {
+      //   console.log("parsing failed", ex);
+      // });
+    // .then(res => res.text())
+    // .then(text => console.log("TEXT",text))
 
-    // const json = await response.json();
-    // console.log("AWAIT JSON", json);
+    const json = await response.json().then(data => {
+      console.log("!!!!", data);
+    });
+    console.log("AWAIT JSON", json);
   };
 
   shouldComponentUpdate() {
