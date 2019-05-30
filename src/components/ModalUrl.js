@@ -67,11 +67,26 @@ class ModalUrl extends React.Component {
     }
   };
 
-  editCurationColumnName = (values, setSubmitting) => {
+  handleSubmit = (values, setSubmitting) => {
     const { id } = this.props;
+    this.getFileByUrl(values.url);
+
     setSubmitting(false);
     this.formik.current.resetForm();
     UIkit.modal("#" + id).hide();
+  };
+
+  getFileByUrl = async url => {
+    const response = await fetch(`http://localhost:3000/${url}`, { headers: { "Content-Type": "application/json" } })
+      .then(response => {
+      console.log("response", response);
+      return response.json();
+    })
+      // .then(res => res.text())  
+      // .then(text => console.log("TEXT",text)) 
+
+    // const json = await response.json();
+    // console.log("AWAIT JSON", json);
   };
 
   shouldComponentUpdate() {
@@ -100,7 +115,7 @@ class ModalUrl extends React.Component {
               ref={this.formik}
               initialValues={{ url: "" }}
               onSubmit={(values, { setSubmitting, resetForm }) => {
-                this.editCurationColumnName(values, setSubmitting);
+                this.handleSubmit(values, setSubmitting);
               }}
             >
               {props => {
