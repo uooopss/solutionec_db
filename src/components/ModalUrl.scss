@@ -1,0 +1,39 @@
+.edit-formik {
+  .input-container {
+    margin-bottom: 10px;
+
+    input,
+    textarea {
+      padding: 0.5rem;
+      font-size: 16px;
+      color: rgb(73, 73, 73);
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #007eff;
+      outline: none;
+    }
+
+    input.error,
+    textarea.error {
+      border-color: red;
+    }
+
+    label {
+      font-weight: 100;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 0;
+    }
+
+    .input-feedback {
+      color: red;
+      font-size: 12px;
+    }
+  }
+}

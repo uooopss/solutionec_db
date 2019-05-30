@@ -1,7 +1,5 @@
 import React from "react";
-// import { JsonEditor as Editor } from "jsoneditor-react";
 import JSONEditor from "jsoneditor";
-import Files from "react-files";
 
 import "jsoneditor/dist/jsoneditor.css";
 

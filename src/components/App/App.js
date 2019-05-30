@@ -3,6 +3,7 @@ import Files from "react-files";
 import { saveAs } from "file-saver";
 
 import Editor from "../Editor";
+import ModalUrl from "../ModalUrl";
 
 import "./App.scss";
 
@@ -82,7 +83,12 @@ class App extends React.Component {
         );
         break;
       case d.type === "open_url":
-        content = <span> {d.name}</span>;
+        content = (
+          <div>
+            <span data-uk-toggle={"target: #open_url"}>{d.name}</span>
+            <ModalUrl id={"open_url"} />
+          </div>
+        );
         break;
       case d.type === "save_online":
         content = <span> {d.name}</span>;
@@ -91,7 +97,12 @@ class App extends React.Component {
         content = <span onClick={() => this.saveJsonToDisk()}> {d.name}</span>;
         break;
       case d.type === "save_url":
-        content = <span> {d.name}</span>;
+        content = (
+          <div>
+            <span data-uk-toggle={"target: #save_url"}>{d.name}</span>
+            <ModalUrl id={"save_url"} />
+          </div>
+        );
         break;
       default:
         break;
