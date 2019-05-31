@@ -78,30 +78,10 @@ class ModalUrl extends React.Component {
   };
 
   getFileByUrl = async url => {
-   const response = await fetch(`${url}`)
-      //   .then(response => {
-      //   console.log("response", response);
-      //   return response.json();
-      // })
-      // .then(function(response) {
-      //   console.log("response", response);
-      //   console.log(response.headers.get("Content-Type"));
-      //   console.log(response.status);
-      //   return await response.json();
-      // })
-      // .then(function(json) {
-      //   console.log("parsed json", json);
-      // })
-      // .catch(function(ex) {
-      //   console.log("parsing failed", ex);
-      // });
-    // .then(res => res.text())
-    // .then(text => console.log("TEXT",text))
-
-    const json = await response.json().then(data => {
-      console.log("!!!!", data);
+    const response = await fetch(`${url}`);
+    await response.json().then(data => {
+      this.props.setJson(data);
     });
-    console.log("AWAIT JSON", json);
   };
 
   shouldComponentUpdate() {
@@ -110,7 +90,6 @@ class ModalUrl extends React.Component {
 
   render() {
     const { id } = this.props;
-    console.log("ModalUrl", id);
 
     return (
       <div id={id} data-uk-modal>

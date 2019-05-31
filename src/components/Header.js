@@ -81,7 +81,7 @@ class Header extends React.Component {
         content = (
           <div>
             <span data-uk-toggle={"target: #open_url"}>{d.name}</span>
-            <ModalUrl id={"open_url"} />
+            <ModalUrl id={"open_url"} setJson={this.props.setJson} />
           </div>
         );
         break;
