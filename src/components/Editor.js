@@ -40,14 +40,14 @@ class Editor extends React.Component {
   }
 
   handleChange() {
+    UIkit.notification.closeAll();
     try {
-      this.props.changeJson(this.editor.get());
+      this.props.changeJson(this.editor.get(), false);
       this.setState({
         jsonFile: this.editor.get()
       });
     } catch (e) {
-      UIkit.notification.closeAll();
-      UIkit.notification({ message: e, status: "danger" });
+      this.props.setErrors(true);
     }
   }
 
@@ -59,7 +59,7 @@ class Editor extends React.Component {
         ref={ref => {
           this.editorRef = ref;
         }}
-        style={{ height: 500, width: 1000 }}
+        style={{ height: 500, width: "50%" }}
       />
     );
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import Files from "react-files";
 import { saveAs } from "file-saver";
+import * as UIkit from "uikit";
 
 import ModalUrl from "./ModalUrl";
 
@@ -30,10 +31,10 @@ const data_to_navigator = [
     name: "Save",
     type: "dropdown",
     values: [
-      {
-        name: "Save online",
-        type: "save_online"
-      },
+      // {
+      //   name: "Save online",
+      //   type: "save_online"
+      // },
       {
         name: "Save to disk",
         type: "save_disk"
@@ -94,7 +95,11 @@ class Header extends React.Component {
       case d.type === "save_url":
         content = (
           <div>
-            <span data-uk-toggle={"target: #save_url"}>{d.name}</span>
+            {!this.props.errors ? (
+              <span data-uk-toggle={"target: #save_url"}>{d.name}</span>
+            ) : (
+              <span onClick={() => this.errorsNotification()}>{d.name}</span>
+            )}
             <ModalUrl id={"save_url"} />
           </div>
         );
@@ -109,7 +114,7 @@ class Header extends React.Component {
     this.fileReader = new FileReader();
     this.fileReader.readAsText(file[0]);
     this.fileReader.onload = event => {
-      this.props.setJson(JSON.parse(event.target.result))
+      this.props.setJson(JSON.parse(event.target.result));
     };
   };
 
@@ -118,11 +123,22 @@ class Header extends React.Component {
   };
 
   saveJsonToDisk = () => {
-    const data = JSON.stringify(this.props.jsonFile);
-    var file = new File([data], "new_json_file.json", {
-      type: "text/plain;charset=utf-8"
-    });
-    saveAs(file);
+    const { errors } = this.props;
+
+    if (!errors) {
+      const data = JSON.stringify(this.props.jsonFile);
+      var file = new File([data], "new_json_file.json", {
+        type: "text/plain;charset=utf-8"
+      });
+      saveAs(file);
+    } else {
+      this.errorsNotification();
+    }
+  };
+
+  errorsNotification = () => {
+    UIkit.notification.closeAll();
+    UIkit.notification({ message: "Bad JSON", status: "danger", timeout: 1500 });
   };
 
   render() {
